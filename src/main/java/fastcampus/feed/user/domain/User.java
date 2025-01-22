@@ -1,5 +1,6 @@
 package fastcampus.feed.user.domain;
 
+import fastcampus.feed.common.domain.PositiveIntegerCount;
 import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(of = "id")
@@ -7,14 +8,14 @@ public class User {
 
     private final Long id;
     private final UserInfo userInfo; // VO 객체를 이용하여 도메인 검증 분리
-    private final UserRelationCounter followingCount;
-    private final UserRelationCounter followerCount;
+    private final PositiveIntegerCount followingCount;
+    private final PositiveIntegerCount followerCount;
 
     public User(Long id, UserInfo userInfo) {
         this.id = id;
         this.userInfo = userInfo;
-        this.followingCount = new UserRelationCounter();
-        this.followerCount = new UserRelationCounter();
+        this.followingCount = new PositiveIntegerCount();
+        this.followerCount = new PositiveIntegerCount();
     }
 
     public void follow(User targetUser) {

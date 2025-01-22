@@ -1,10 +1,9 @@
-package fastcampus.feed.user.domain;
+package fastcampus.feed.common.domain;
 
-public class UserRelationCounter {
-
+public class PositiveIntegerCount {
     private int count;
 
-    public UserRelationCounter() {
+    public PositiveIntegerCount() {
         count = 0;
     }
 
