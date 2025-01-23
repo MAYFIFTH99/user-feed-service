@@ -10,11 +10,6 @@ import lombok.Getter;
 
 @EqualsAndHashCode(of = "id")
 @Getter
-
-import lombok.EqualsAndHashCode;
-
-@EqualsAndHashCode(of = "id")
-
 public class User {
 
     private final Long id;
@@ -31,6 +26,7 @@ public class User {
 
         this.followingCount = new PositiveIntegerCount();
         this.followerCount = new PositiveIntegerCount();
+    }
 
 
     public void follow(User targetUser) {

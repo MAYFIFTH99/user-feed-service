@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import fastcampus.feed.common.domain.PositiveIntegerCount;
 import org.junit.jupiter.api.Test;
 
 class UserTest {
