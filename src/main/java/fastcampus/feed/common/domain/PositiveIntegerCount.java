@@ -18,4 +18,12 @@ public class PositiveIntegerCount {
         count--;
     }
 
+    public int getCount(){
+        return count;
+    }
+
+    public PositiveIntegerCount(int count) {
+        this.count = count;
+    }
+
 }
