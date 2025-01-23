@@ -2,11 +2,15 @@ package fastcampus.feed.user.domain;
 
 
 import fastcampus.feed.common.domain.PositiveIntegerCount;
+
+
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @EqualsAndHashCode(of = "id")
 @Getter
+
 import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(of = "id")
@@ -23,10 +27,11 @@ public class User {
     public User(Long id, UserInfo userInfo) {
         this.id = id;
         this.userInfo = userInfo;
+
+
         this.followingCount = new PositiveIntegerCount();
         this.followerCount = new PositiveIntegerCount();
 
-    }
 
     public void follow(User targetUser) {
         if(this.equals(targetUser)){
