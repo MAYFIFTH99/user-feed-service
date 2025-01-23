@@ -10,11 +10,6 @@ import lombok.Getter;
 
 @EqualsAndHashCode(of = "id")
 @Getter
-
-import lombok.EqualsAndHashCode;
-
-@EqualsAndHashCode(of = "id")
-
 public class User {
 
     private final Long id;
