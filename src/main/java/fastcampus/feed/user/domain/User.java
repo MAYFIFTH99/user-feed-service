@@ -3,9 +3,18 @@ package fastcampus.feed.user.domain;
 
 import fastcampus.feed.common.domain.PositiveIntegerCount;
 
+
+
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+
+@EqualsAndHashCode(of = "id")
+@Getter
+
 import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(of = "id")
+
 public class User {
 
     private final Long id;
@@ -18,6 +27,7 @@ public class User {
     public User(Long id, UserInfo userInfo) {
         this.id = id;
         this.userInfo = userInfo;
+
 
         this.followingCount = new PositiveIntegerCount();
         this.followerCount = new PositiveIntegerCount();
@@ -44,6 +54,14 @@ public class User {
     }
     private void followerCountDecrease(){
         followerCount.decrease();
+    }
+
+
+    public int getFollowingCount(){
+        return followingCount.getCount();
+    }
+    public int getFollowerCount(){
+        return followerCount.getCount();
     }
 
 }

@@ -8,6 +8,12 @@ public class UserInfo {
         if(name == null){
             throw new IllegalStateException();
         }
+
+        if (name.isEmpty()) {
+            throw new IllegalStateException();
+        }
+
+
         this.name = name;
         this.profileImageUrl = profileImageUrl;
     }
