@@ -1,0 +1,75 @@
+package fastcampus.feed.post.service;
+
+import fastcampus.feed.post.domain.Post;
+import fastcampus.feed.post.domain.comment.Comment;
+import fastcampus.feed.post.domain.content.CommentContent;
+import fastcampus.feed.post.repository.interfaces.CommentRepository;
+import fastcampus.feed.post.repository.interfaces.LikeRepository;
+import fastcampus.feed.post.repository.interfaces.PostRepository;
+import fastcampus.feed.post.service.dto.CreateCommentRequestDto;
+import fastcampus.feed.post.service.dto.LikeCommentRequestDto;
+import fastcampus.feed.post.service.dto.UpdateCommentRequestDto;
+import fastcampus.feed.user.domain.User;
+import fastcampus.feed.user.service.UserService;
+
+public class CommentService {
+
+    private final UserService userService;
+    private final PostService postService;
+    private final CommentRepository commentRepository;
+    private final LikeRepository likeRepository;
+
+    public CommentService(CommentRepository commentRepository, UserService userService,
+            LikeRepository likeRepository, PostService postService) {
+        this.commentRepository = commentRepository;
+        this.userService = userService;
+        this.likeRepository = likeRepository;
+        this.postService = postService;
+    }
+
+    public Comment createComment(CreateCommentRequestDto dto) {
+        Post post = postService.getPost(dto.postId());
+        User user = userService.getUser(dto.userId());
+        CommentContent commentContent = new CommentContent(dto.content());
+
+        Comment comment = new Comment(null, user, post, commentContent);
+        return commentRepository.save(comment);
+    }
+
+    public Comment getComment(Long commentId) {
+        return commentRepository.findById(commentId);
+    }
+
+    public Comment updateComment(UpdateCommentRequestDto dto){
+        Comment comment = getComment(dto.commentId());
+        User user = userService.getUser(dto.userId());
+
+        comment.updateComment(user, dto.content());
+
+        return commentRepository.save(comment);
+    }
+
+    public void likeComment(LikeCommentRequestDto dto) {
+        Comment comment = getComment(dto.commentId());
+        User user = userService.getUser(dto.userId());
+
+        if (likeRepository.isAlreadyLiked(user, comment)) {
+            return;
+        }
+
+        comment.like(user);
+        likeRepository.save(user, comment);
+    }
+
+    public void unlikeComment(LikeCommentRequestDto dto) {
+        Comment comment = getComment(dto.commentId());
+        User user = userService.getUser(dto.userId());
+
+        if (likeRepository.isAlreadyLiked(user, comment)) {
+            comment.unlike(user);
+            likeRepository.delete(user, comment);
+        }
+
+
+    }
+}
