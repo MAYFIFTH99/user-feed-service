@@ -13,7 +13,7 @@ public class CommentContent extends Content {
 
     @Override
     protected void checkText(String content) {
-        if (content == null) {
+        if (content == null || content.isEmpty()) {
             throw new IllegalStateException();
         }
 
