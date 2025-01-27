@@ -27,11 +27,27 @@ public class FakeObjectFactory {
     private static final LikeRepository fakeLikeRepository = new FakeLikeRepository();
 
     private static final UserService userService = new UserService(fakeUserRepository);
-    private static final FollowService userRelationService = new FollowService(
+    private static final FollowService followService = new FollowService(
             fakeUserRelationRepository, userService);
     private static final PostService postService = new PostService(userService, fakePostRepository,
             fakeLikeRepository);
     private static final CommentService commentService = new CommentService(fakeCommentRepository,
             userService, fakeLikeRepository, postService);
+
+    public static UserService getUserService() {
+        return userService;
+    }
+
+    public static FollowService getFollowService() {
+        return followService;
+    }
+
+    public static PostService getPostService() {
+        return postService;
+    }
+
+    public static CommentService getCommentService() {
+        return commentService;
+    }
 
 }

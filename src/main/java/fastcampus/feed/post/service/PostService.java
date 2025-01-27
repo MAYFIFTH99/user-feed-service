@@ -17,7 +17,7 @@ public class PostService {
     private final UserService userService;
     private LikeRepository likeRepository;
 
-    public PostService(PostRepository postRepository, UserService userService,
+    public PostService(UserService userService, PostRepository postRepository,
             LikeRepository likeRepository) {
         this.postRepository = postRepository;
         this.userService = userService;
@@ -30,13 +30,13 @@ public class PostService {
     }
 
     @Transactional
-    public void createPost(CreatePostRequestDto dto) {
+    public Post createPost(CreatePostRequestDto dto) {
         User user = userService.getUser(dto.userId());
 
         PostContent postContent = new PostContent(dto.postContent());
         Post post = new Post(null, user, postContent, dto.postPublishState());
 
-        postRepository.save(post);
+        return postRepository.save(post);
 
     }
 
