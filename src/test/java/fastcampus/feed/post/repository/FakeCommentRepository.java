@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FakeCommentRepository implements CommentRepository {
+
     Map<Long, Comment> store = new HashMap<>();
     Long sequence = 1L;
 
@@ -14,8 +15,9 @@ public class FakeCommentRepository implements CommentRepository {
         if (comment.getId() != null) {
             store.put(comment.getId(), comment);
         }
-        Comment newComment = new Comment(sequence++, comment.getAuthor(), comment.getPost(),
+        Comment newComment = new Comment(sequence, comment.getAuthor(), comment.getPost(),
                 comment.getContent());
+        store.put(sequence++, newComment);
         return newComment;
     }
 
