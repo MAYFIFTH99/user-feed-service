@@ -4,9 +4,13 @@ import fastcampus.feed.common.domain.PositiveIntegerCount;
 import fastcampus.feed.post.domain.Post;
 import fastcampus.feed.post.domain.content.Content;
 import fastcampus.feed.user.domain.User;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 
 @Getter
+@AllArgsConstructor
+@Builder
 public class Comment {
 
     private final Long id;

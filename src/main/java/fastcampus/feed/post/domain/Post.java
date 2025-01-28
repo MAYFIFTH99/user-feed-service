@@ -3,9 +3,13 @@ package fastcampus.feed.post.domain;
 import fastcampus.feed.common.domain.PositiveIntegerCount;
 import fastcampus.feed.post.domain.content.PostContent;
 import fastcampus.feed.user.domain.User;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 
 @Getter
+@AllArgsConstructor
+@Builder
 public class Post {
 
     private final Long id;
