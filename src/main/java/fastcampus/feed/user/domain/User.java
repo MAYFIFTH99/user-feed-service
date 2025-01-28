@@ -4,12 +4,15 @@ package fastcampus.feed.user.domain;
 import fastcampus.feed.common.domain.PositiveIntegerCount;
 
 
-
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @EqualsAndHashCode(of = "id")
 @Getter
+@Builder
+@AllArgsConstructor
 public class User {
 
     private final Long id;
