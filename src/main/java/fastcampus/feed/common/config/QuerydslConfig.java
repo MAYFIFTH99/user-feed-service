@@ -1,4 +1,4 @@
-package fastcampus.feed.common.confing;
+package fastcampus.feed.common.config;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
