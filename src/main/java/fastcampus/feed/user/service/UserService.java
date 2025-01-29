@@ -4,7 +4,10 @@ import fastcampus.feed.user.domain.User;
 import fastcampus.feed.user.domain.UserInfo;
 import fastcampus.feed.user.repository.UserRepository;
 import fastcampus.feed.user.service.dto.CreateUserRequestDto;
+import fastcampus.feed.user.service.dto.GetUserResponseDto;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UserService {
 
     private final UserRepository userRepository;
@@ -21,6 +24,11 @@ public class UserService {
 
     public User getUser(Long id){
         return userRepository.findById(id);
+    }
+
+    public GetUserResponseDto getUserResponseDto(Long id){
+        User user = userRepository.findById(id);
+        return new GetUserResponseDto(user);
     }
 
 }

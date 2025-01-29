@@ -13,11 +13,13 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.DynamicUpdate;
 
 @Entity
 @Table(name = "user")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
+@DynamicUpdate
 @Getter
 public class UserEntity extends TimeBaseEntity {
     @Id
@@ -26,8 +28,8 @@ public class UserEntity extends TimeBaseEntity {
 
     private String name;
     private String profileImageUrl;
-    private Integer followerCount;
-    private Integer followingCount;
+    private int followerCount;
+    private int followingCount;
 
     public UserEntity(User user){
         this.id = user.getId();
