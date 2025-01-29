@@ -19,11 +19,13 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.DynamicUpdate;
 
 @Entity
 @Table(name = "post")
 @Getter
 @NoArgsConstructor
+@DynamicUpdate
 public class PostEntity extends TimeBaseEntity {
 
     @Id
