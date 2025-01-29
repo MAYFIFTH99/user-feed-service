@@ -60,9 +60,9 @@ class PostServiceTest {
     @Test
     void updatePost() throws Exception {
         //given
-        UpdatePostRequestDto updateDto = new UpdatePostRequestDto(user1.getId(), post1.getId(), "updatedContent",
+        UpdatePostRequestDto updateDto = new UpdatePostRequestDto(user1.getId(), "updatedContent",
                 PostPublishState.PRIVATE);
-        postService.updatePost(updateDto);
+        postService.updatePost(post1.getId(),updateDto);
 
         //when
         Post updatedPost = postService.getPost(post1.getId());
@@ -76,9 +76,9 @@ class PostServiceTest {
     @Test
     void likePost() throws Exception {
         //given
-        LikePostRequestDto likeDto = new LikePostRequestDto(user2.getId(), post1.getId());
+        LikePostRequestDto likeDto = new LikePostRequestDto(user2.getId());
         //when
-        postService.likePost(likeDto);
+        postService.likePost(post1.getId(), likeDto);
         //then
         assertEquals(post1.getLikeCount().getCount(), 1);
 
@@ -86,9 +86,9 @@ class PostServiceTest {
     @Test
     void like_already_post() throws Exception {
         //given
-        LikePostRequestDto likeDto = new LikePostRequestDto(user2.getId(), post1.getId());
+        LikePostRequestDto likeDto = new LikePostRequestDto(user2.getId());
         //when
-        postService.likePost(likeDto);
+        postService.likePost(post1.getId(), likeDto);
         //then
         assertEquals(post1.getLikeCount().getCount(), 1);
     }
@@ -96,15 +96,15 @@ class PostServiceTest {
     @Test
     void unlike() throws Exception {
         //given
-        LikePostRequestDto likeDto = new LikePostRequestDto(user2.getId(), post1.getId());
-        postService.likePost(likeDto);
+        LikePostRequestDto likeDto = new LikePostRequestDto(user2.getId());
+        postService.likePost(post1.getId(), likeDto);
 
         //when
-        postService.unlikePost(likeDto);
+        postService.unlikePost(post1.getId(), likeDto);
         //then
         assertEquals(post1.getLikeCount().getCount(), 0);
 
-        postService.unlikePost(likeDto);
+        postService.unlikePost(post1.getId(), likeDto);
         assertEquals(post1.getLikeCount().getCount(), 0);
 
     }
