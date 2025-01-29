@@ -1,9 +1,10 @@
 package fastcampus.feed.user.repository;
 
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import fastcampus.feed.user.domain.User;
-import java.util.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
 
-public interface UserRepository {
+public interface UserRepository  {
     User save(User user);
-    Optional<User> findById(Long userId);
+    User findById(Long userId);
 }
