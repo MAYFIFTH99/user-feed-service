@@ -65,9 +65,9 @@ class CommentServiceTest {
         Comment savedComment = commentService.createComment(commentDto);
 
         //when
-        Comment updatedComment = commentService.updateComment(
-                new UpdateCommentRequestDto(user1.getId(), savedComment.getId(),
-                        "updatedCommentContent"));
+        Comment updatedComment = commentService.updateComment(savedComment.getId(),
+                new UpdateCommentRequestDto(user1.getId(), "updatedCommentContent"));
+
         //then
         assertEquals(updatedComment.getContent().getContentText(), "updatedCommentContent");
     }
@@ -76,10 +76,9 @@ class CommentServiceTest {
     void like() throws Exception {
         //given
         Comment savedComment = commentService.createComment(commentDto);
-        LikeCommentRequestDto likeDto = new LikeCommentRequestDto(user2.getId(),
-                savedComment.getId());
+        LikeCommentRequestDto likeDto = new LikeCommentRequestDto(user2.getId());
         //when
-        commentService.likeComment(likeDto);
+        commentService.likeComment(savedComment.getId(), likeDto);
 
         //then
         assertEquals(savedComment.getLikeCount().getCount(), 1);
@@ -89,12 +88,12 @@ class CommentServiceTest {
     void like_already_Ex() throws Exception {
         //given
         Comment savedComment = commentService.createComment(commentDto);
-        LikeCommentRequestDto likeDto = new LikeCommentRequestDto(user2.getId(),
-                savedComment.getId());
+        LikeCommentRequestDto likeDto = new LikeCommentRequestDto(user2.getId()
+        );
 
-        commentService.likeComment(likeDto);
+        commentService.likeComment(savedComment.getId(), likeDto);
         //when
-        commentService.likeComment(likeDto);
+        commentService.likeComment(savedComment.getId(), likeDto);
         //then
         assertEquals(savedComment.getLikeCount().getCount(), 1);
 
@@ -105,17 +104,16 @@ class CommentServiceTest {
     void unlike() throws Exception {
         //given
         Comment savedComment = commentService.createComment(commentDto);
-        LikeCommentRequestDto likeDto = new LikeCommentRequestDto(user2.getId(),
-                savedComment.getId());
-        commentService.likeComment(likeDto);
+        LikeCommentRequestDto likeDto = new LikeCommentRequestDto(user2.getId());
+        commentService.likeComment(savedComment.getId(),likeDto);
 
         //when
-        commentService.unlikeComment(likeDto);
+        commentService.unlikeComment(savedComment.getId(),likeDto);
 
         //then
         assertEquals(savedComment.getLikeCount().getCount(), 0);
 
-        commentService.unlikeComment(likeDto);
+        commentService.unlikeComment(savedComment.getId(), likeDto);
         assertEquals(savedComment.getLikeCount().getCount(), 0);
     }
 

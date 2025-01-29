@@ -9,20 +9,18 @@ import fastcampus.feed.post.service.dto.CreatePostRequestDto;
 import fastcampus.feed.post.service.dto.UpdatePostRequestDto;
 import fastcampus.feed.user.domain.User;
 import fastcampus.feed.user.service.UserService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Service
+@RequiredArgsConstructor
 public class PostService {
 
     private final PostRepository postRepository;
     private final UserService userService;
-    private LikeRepository likeRepository;
+    private final LikeRepository likeRepository;
 
-    public PostService(UserService userService, PostRepository postRepository,
-            LikeRepository likeRepository) {
-        this.postRepository = postRepository;
-        this.userService = userService;
-        this.likeRepository = likeRepository;
-    }
 
     @Transactional
     public Post getPost(Long id){
@@ -41,17 +39,17 @@ public class PostService {
     }
 
     @Transactional
-    public void updatePost(UpdatePostRequestDto dto){
-        Post post = getPost(dto.postId());
+    public void updatePost(Long postId, UpdatePostRequestDto dto){
+        Post post = getPost(postId);
         User user = userService.getUser(dto.userId());
         post.updatePost(user, dto.content(), dto.publishState());
         postRepository.save(post);
     }
 
     @Transactional
-    public void likePost(LikePostRequestDto dto) {
+    public void likePost(Long postId, LikePostRequestDto dto) {
         User user = userService.getUser(dto.userId());
-        Post post = getPost(dto.postId());
+        Post post = getPost(postId);
 
         if (likeRepository.isAlreadyLiked(user, post)) {
             return;
@@ -62,9 +60,9 @@ public class PostService {
     }
 
     @Transactional
-    public void unlikePost(LikePostRequestDto dto) {
+    public void unlikePost(Long postId, LikePostRequestDto dto) {
         User user = userService.getUser(dto.userId());
-        Post post = getPost(dto.postId());
+        Post post = getPost(postId);
 
         if (likeRepository.isAlreadyLiked(user, post)) {
             likeRepository.delete(user, post);

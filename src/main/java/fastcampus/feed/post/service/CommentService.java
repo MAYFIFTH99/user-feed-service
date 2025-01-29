@@ -5,13 +5,15 @@ import fastcampus.feed.post.domain.comment.Comment;
 import fastcampus.feed.post.domain.content.CommentContent;
 import fastcampus.feed.post.repository.interfaces.CommentRepository;
 import fastcampus.feed.post.repository.interfaces.LikeRepository;
-import fastcampus.feed.post.repository.interfaces.PostRepository;
 import fastcampus.feed.post.service.dto.CreateCommentRequestDto;
 import fastcampus.feed.post.service.dto.LikeCommentRequestDto;
 import fastcampus.feed.post.service.dto.UpdateCommentRequestDto;
 import fastcampus.feed.user.domain.User;
 import fastcampus.feed.user.service.UserService;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+@Service
 public class CommentService {
 
     private final UserService userService;
@@ -26,7 +28,7 @@ public class CommentService {
         this.likeRepository = likeRepository;
         this.postService = postService;
     }
-
+    @Transactional
     public Comment createComment(CreateCommentRequestDto dto) {
         Post post = postService.getPost(dto.postId());
         User user = userService.getUser(dto.userId());
@@ -40,17 +42,18 @@ public class CommentService {
         return commentRepository.findById(commentId);
     }
 
-    public Comment updateComment(UpdateCommentRequestDto dto){
-        Comment comment = getComment(dto.commentId());
+    @Transactional
+    public Comment updateComment(Long commentId, UpdateCommentRequestDto dto){
+        Comment comment = getComment(commentId);
         User user = userService.getUser(dto.userId());
 
         comment.updateComment(user, dto.content());
 
         return commentRepository.save(comment);
     }
-
-    public void likeComment(LikeCommentRequestDto dto) {
-        Comment comment = getComment(dto.commentId());
+    @Transactional
+    public void likeComment(Long commentId, LikeCommentRequestDto dto) {
+        Comment comment = getComment(commentId);
         User user = userService.getUser(dto.userId());
 
         if (likeRepository.isAlreadyLiked(user, comment)) {
@@ -60,9 +63,9 @@ public class CommentService {
         comment.like(user);
         likeRepository.save(user, comment);
     }
-
-    public void unlikeComment(LikeCommentRequestDto dto) {
-        Comment comment = getComment(dto.commentId());
+    @Transactional
+    public void unlikeComment(Long commentId, LikeCommentRequestDto dto) {
+        Comment comment = getComment(commentId);
         User user = userService.getUser(dto.userId());
 
         if (likeRepository.isAlreadyLiked(user, comment)) {
