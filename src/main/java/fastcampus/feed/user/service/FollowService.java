@@ -2,9 +2,10 @@ package fastcampus.feed.user.service;
 
 import fastcampus.feed.user.domain.User;
 import fastcampus.feed.user.repository.FollowRepository;
-import fastcampus.feed.user.repository.UserRepository;
 import fastcampus.feed.user.service.dto.FollowUserRequestDto;
+import org.springframework.stereotype.Service;
 
+@Service
 public class FollowService {
 
     private final FollowRepository followRepository;
