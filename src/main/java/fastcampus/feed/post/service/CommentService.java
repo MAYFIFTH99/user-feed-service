@@ -10,10 +10,12 @@ import fastcampus.feed.post.service.dto.LikeCommentRequestDto;
 import fastcampus.feed.post.service.dto.UpdateCommentRequestDto;
 import fastcampus.feed.user.domain.User;
 import fastcampus.feed.user.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@RequiredArgsConstructor
 public class CommentService {
 
     private final UserService userService;
@@ -21,13 +23,6 @@ public class CommentService {
     private final CommentRepository commentRepository;
     private final LikeRepository likeRepository;
 
-    public CommentService(CommentRepository commentRepository, UserService userService,
-            LikeRepository likeRepository, PostService postService) {
-        this.commentRepository = commentRepository;
-        this.userService = userService;
-        this.likeRepository = likeRepository;
-        this.postService = postService;
-    }
     @Transactional
     public Comment createComment(CreateCommentRequestDto dto) {
         Post post = postService.getPost(dto.postId());
