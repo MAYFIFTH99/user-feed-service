@@ -19,6 +19,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicUpdate;
 
 @Entity
@@ -43,6 +44,9 @@ public class PostEntity extends TimeBaseEntity {
 
     private Integer likeCount;
 
+    @ColumnDefault("0")
+    private int commentCount;
+
     public PostEntity(Post post){
         this.id = post.getId();
         this.author = new UserEntity(post.getAuthor());
@@ -59,5 +63,9 @@ public class PostEntity extends TimeBaseEntity {
                 .postPublishState(postPublishState)
                 .likeCount(new PositiveIntegerCount(likeCount))
                 .build();
+    }
+
+    public void increaseCommentCount(){
+        this.commentCount++;
     }
 }

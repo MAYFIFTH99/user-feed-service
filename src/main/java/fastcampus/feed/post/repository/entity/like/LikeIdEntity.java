@@ -17,5 +17,5 @@ public class LikeIdEntity {
     private Long userId;
 
     @Enumerated(EnumType.STRING)
-    private LikeTarget target;
+    private LikeTarget targetType;
 }
