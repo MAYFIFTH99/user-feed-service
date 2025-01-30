@@ -1,5 +1,6 @@
 package fastcampus.feed.user.repository;
 
+import fastcampus.feed.post.repository.post_queue.UserPostQueueCommandRepository;
 import fastcampus.feed.user.domain.User;
 import fastcampus.feed.user.repository.entity.FollowEntity;
 import fastcampus.feed.user.repository.entity.FollowIdEntity;
@@ -17,6 +18,7 @@ public class FollowRepositoryImpl implements FollowRepository {
 
     private final JpaFollowRepository jpaFollowRepository;
     private final JpaUserRepository jpaUserRepository;
+    private final UserPostQueueCommandRepository userPostQueueCommandRepository;
 
 
     @Override
@@ -31,6 +33,7 @@ public class FollowRepositoryImpl implements FollowRepository {
         FollowEntity followEntity = new FollowEntity(user.getId(), targetUser.getId());
         jpaFollowRepository.save(followEntity);
         jpaUserRepository.saveAll(List.of(new UserEntity(user), new UserEntity(targetUser)));
+        userPostQueueCommandRepository.saveFollowPost(user.getId(), targetUser.getId());
     }
 
     @Override
@@ -38,5 +41,6 @@ public class FollowRepositoryImpl implements FollowRepository {
         FollowIdEntity followIdEntity = new FollowIdEntity(user.getId(), targetUser.getId());
         jpaFollowRepository.deleteById(followIdEntity);
         jpaUserRepository.saveAll(List.of(new UserEntity(user), new UserEntity(targetUser)));
+        userPostQueueCommandRepository.deleteUnFollowPost(user.getId(), targetUser.getId());
     }
 }
