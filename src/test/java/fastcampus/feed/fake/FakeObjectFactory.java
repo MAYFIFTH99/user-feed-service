@@ -31,8 +31,8 @@ public class FakeObjectFactory {
             fakeUserRelationRepository, userService);
     private static final PostService postService = new PostService(fakePostRepository, userService,
             fakeLikeRepository);
-    private static final CommentService commentService = new CommentService(fakeCommentRepository,
-            userService, fakeLikeRepository, postService);
+    private static final CommentService commentService = new CommentService(userService, postService,fakeCommentRepository,
+            fakeLikeRepository);
 
     public static UserService getUserService() {
         return userService;
