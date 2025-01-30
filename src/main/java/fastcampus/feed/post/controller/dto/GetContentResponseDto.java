@@ -12,7 +12,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class GetContentResponseDto {
+public abstract class GetContentResponseDto {
 
     private Long id;
     private String content;
