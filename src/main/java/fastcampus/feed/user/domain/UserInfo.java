@@ -6,13 +6,12 @@ public class UserInfo {
 
     public UserInfo(String name, String profileImageUrl) {
         if(name == null){
-            throw new IllegalStateException();
+            throw new IllegalArgumentException("사용자 이름은 null 일 수 없습니다.");
         }
 
-        if (name.isEmpty()) {
-            throw new IllegalStateException();
+        if (name.isEmpty() || name.isBlank()) {
+            throw new IllegalArgumentException("사용자 이름은 빈 문자열일 수 없습니다.");
         }
-
 
         this.name = name;
         this.profileImageUrl = profileImageUrl;
