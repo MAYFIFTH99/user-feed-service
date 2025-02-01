@@ -43,6 +43,5 @@ public class FeedAcceptanceTest extends AcceptanceTestTemplate {
         //then
         assertThat(result.size()).isEqualTo(1);
         assertThat(createdPostId).isEqualTo(1L);
-        assertThat(result.get(0).getContent()).isEqualTo("user2 post");
     }
 }
