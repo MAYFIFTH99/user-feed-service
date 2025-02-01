@@ -18,8 +18,9 @@ public class PostRepositoryImpl implements PostRepository {
     @Override
     public Post save(Post post) {
         PostEntity postEntity = new PostEntity(post);
-        userPostQueueCommandRepository.publishPost(postEntity);
-        return jpaPostRepository.save(postEntity).toPost();
+        PostEntity savedEntity = jpaPostRepository.save(postEntity);
+        userPostQueueCommandRepository.publishPost(savedEntity);
+        return savedEntity.toPost();
     }
 
     @Override

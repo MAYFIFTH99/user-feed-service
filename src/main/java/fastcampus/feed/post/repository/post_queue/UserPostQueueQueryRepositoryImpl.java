@@ -30,7 +30,7 @@ public class UserPostQueueQueryRepositoryImpl implements UserPostQueueQueryRepos
                 .select(
                         Projections.fields(
                                 GetPostContentResponseDto.class,
-                                postEntity.id.as("id"),
+                                postEntity.id.as("postId"),
                                 postEntity.content.as("content"),
                                 userEntity.id.as("userId"),
                                 userEntity.name.as("userName"),
