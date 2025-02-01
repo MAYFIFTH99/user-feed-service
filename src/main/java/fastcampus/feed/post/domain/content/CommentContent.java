@@ -1,7 +1,5 @@
 package fastcampus.feed.post.domain.content;
 
-import fastcampus.feed.post.common.DateTimeInfo;
-
 public class CommentContent extends Content {
 
     private static final int MAX_LENGTH = 100;
@@ -13,12 +11,12 @@ public class CommentContent extends Content {
 
     @Override
     protected void checkText(String content) {
-        if (content == null || content.isEmpty()) {
-            throw new IllegalStateException();
+        if (content == null || content.isEmpty() || content.isBlank()) {
+            throw new IllegalArgumentException("댓글 내용은 공백일 수 없습니다.");
         }
 
         if (content.length() > MAX_LENGTH) {
-            throw new IllegalStateException();
+            throw new IllegalArgumentException("댓글 길이는 100자 이하여야 합니다.");
         }
     }
 

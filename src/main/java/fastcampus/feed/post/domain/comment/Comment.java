@@ -20,16 +20,9 @@ public class Comment {
     private final PositiveIntegerCount likeCount;
 
     public Comment(Long id, User author, Post post, Content content) {
-        if (author == null) {
-            throw new IllegalStateException();
-        }
-        if (post == null) {
-            throw new IllegalStateException();
-        }
-
-        if (content == null) {
-            throw new IllegalStateException();
-        }
+        validateNotNull(author, "작성자");
+        validateNotNull(post, "게시글");
+        validateNotNull(content, "댓글 내용");
 
         this.id = id;
         this.author = author;
@@ -38,21 +31,29 @@ public class Comment {
         this.likeCount = new PositiveIntegerCount();
     }
 
-    public void like(User user){
-        if(this.author.equals(user)){
+    public void like(User user) {
+        if (this.author.equals(user)) {
             throw new IllegalStateException();
         }
         likeCount.increase();
     }
 
-    public void unlike(User user){
+    public void unlike(User user) {
         likeCount.decrease();
     }
 
-    public void updateComment(User user, String updateComment){
-        if(!author.equals(user)){
-            throw new IllegalStateException();
+    public void updateComment(User user, String updateComment) {
+
+        if (!author.equals(user)) {
+            throw new IllegalArgumentException("작성자만 댓글을 수정할 수 있습니다.");
         }
         content.updateContent(updateComment);
+    }
+
+    private void validateNotNull(Object value, String fieldName) {
+        if (value == null) {
+            throw new IllegalArgumentException(String.format("%s를 찾을 수 없습니다.", fieldName));
+        }
+
     }
 }

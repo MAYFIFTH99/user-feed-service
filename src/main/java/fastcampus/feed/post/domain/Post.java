@@ -19,13 +19,8 @@ public class Post {
     private final PositiveIntegerCount likeCount;
 
     public Post(Long id, User author, PostContent postContent, PostPublishState postPublishState) {
-        if (author == null) {
-            throw new IllegalArgumentException("user is null");
-        }
-
-        if (postContent == null) {
-            throw new IllegalArgumentException("postContent is null");
-        }
+        validateNotNull(author, "작성자");
+        validateNotNull(postContent, "게시글 내용");
 
         this.id = id;
         this.author = author;
@@ -35,20 +30,26 @@ public class Post {
     }
 
     public void like(User user){
-        if (this.author.equals(user)) {
-            throw new IllegalArgumentException();
-        }
         if (user == null) {
-            throw new IllegalArgumentException();
+            throw new IllegalStateException("좋아요를 누른 사용자를 찾을 수 없습니다.");
         }
+
+        if (this.author.equals(user)) {
+            throw new IllegalStateException("자신의 게시글에는 좋아요를 누를 수 없습니다.");
+        }
+
        likeCount.increase();
     }
 
     public void unlike(User user){
+        if (user == null) {
+            throw new IllegalStateException("좋아요를 취소한 사용자를 찾을 수 없습니다.");
+        }
         likeCount.decrease();
     }
 
     public void updatePost(User user, String content, PostPublishState postPublishState) {
+        validateNotNull(user, "사용자");
         if(!author.equals(user)) {
             throw new IllegalArgumentException();
         }
@@ -56,5 +57,10 @@ public class Post {
         this.postPublishState = postPublishState;
     }
 
+    private void validateNotNull(Object value, String fieldName) {
+        if (value == null) {
+            throw new IllegalArgumentException(String.format("%s를 찾을 수 없습니다.", fieldName));
+        }
+    }
 
 }
