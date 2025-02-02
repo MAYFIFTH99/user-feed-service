@@ -27,7 +27,7 @@ public class UserService {
     }
 
     public GetUserResponseDto getUserResponseDto(Long id){
-        User user = userRepository.findById(id);
+        User user = getUser(id);
         return new GetUserResponseDto(user);
     }
 

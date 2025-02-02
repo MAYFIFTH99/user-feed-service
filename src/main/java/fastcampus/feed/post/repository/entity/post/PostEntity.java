@@ -15,18 +15,19 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.LockModeType;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Version;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.data.jpa.repository.Lock;
 
 @Entity
 @Table(name = "post")
 @Getter
 @NoArgsConstructor
-@DynamicUpdate
 public class PostEntity extends TimeBaseEntity {
 
     @Id
@@ -47,6 +48,9 @@ public class PostEntity extends TimeBaseEntity {
     @ColumnDefault("0")
     private int commentCount;
 
+    @Version
+    private Long version;
+
     public PostEntity(Post post){
         this.id = post.getId();
         this.author = new UserEntity(post.getAuthor());
@@ -65,6 +69,7 @@ public class PostEntity extends TimeBaseEntity {
                 .build();
     }
 
+    @Lock(LockModeType.OPTIMISTIC)
     public void increaseCommentCount(){
         this.commentCount++;
     }

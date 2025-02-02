@@ -20,3 +20,8 @@ spring:
 logging.level:
   org.hibernate.SQL: debug # 이거 끄면 format_sql 적용 안됨
 #  org.hibernate.type: trace
+
+#decorator:
+#  datasource:
+#    p6spy:
+#      enable-logging: false

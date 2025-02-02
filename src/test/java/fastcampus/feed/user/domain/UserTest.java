@@ -1,11 +1,9 @@
 package fastcampus.feed.user.domain;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import fastcampus.feed.common.domain.PositiveIntegerCount;
 import org.junit.jupiter.api.Test;
 
 class UserTest {

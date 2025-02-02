@@ -72,11 +72,11 @@ class CommentTest {
 
     @Test
     void update_Ex() throws Exception {
-        assertThrows(IllegalStateException.class,
+        assertThrows(IllegalArgumentException.class,
                 () -> comment2.updateComment(user1, "update comment"));
 
 
-        assertThrows(IllegalStateException.class,
+        assertThrows(IllegalArgumentException.class,
                 () -> comment2.updateComment(user1, "a".repeat(101)));
     }
 }

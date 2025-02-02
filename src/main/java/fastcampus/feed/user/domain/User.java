@@ -34,7 +34,7 @@ public class User {
 
     public void follow(User targetUser) {
         if(this.equals(targetUser)){
-            throw new IllegalStateException();
+            throw new IllegalArgumentException("자기 자신을 팔로우 할 수 없습니다.");
         }
         followingCount.increase();
         targetUser.followerCountIncrease();
@@ -42,7 +42,7 @@ public class User {
 
     public void unfollow(User targetUser) {
         if(this.equals(targetUser)){
-            throw new IllegalStateException();
+            throw new IllegalArgumentException("자기 자신을 언팔로우 할 수 없습니다.");
         }
         followingCount.decrease();
         targetUser.followerCountDecrease();

@@ -34,7 +34,7 @@ class PostTest {
     @Test
     void like_self() throws Exception {
         //when & then
-        assertThrows(IllegalArgumentException.class,() -> post1.like(user1));
+        assertThrows(IllegalStateException.class,() -> post1.like(user1));
     }
 
     @Test

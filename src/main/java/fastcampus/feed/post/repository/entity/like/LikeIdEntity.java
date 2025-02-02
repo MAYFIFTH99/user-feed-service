@@ -13,9 +13,19 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class LikeIdEntity {
 
+    /**
+     * 좋아요 대상(게시물 또는 댓글)의 ID
+     */
     private Long targetId;
+
+    /**
+     * 좋아요를 누른 사용자의 ID
+     */
     private Long userId;
 
+    /**
+     * 좋아요 대상의 유형(Type - Post, Comment)
+     */
     @Enumerated(EnumType.STRING)
     private LikeTarget targetType;
 }

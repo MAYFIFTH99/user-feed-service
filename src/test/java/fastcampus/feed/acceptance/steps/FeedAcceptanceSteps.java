@@ -28,6 +28,7 @@ public class FeedAcceptanceSteps {
                 .when()
                 .get("/feed/{userId}", userId)
                 .then().log().all()
+                .statusCode(200)
                 .extract()
                 .jsonPath()
                 .getList("value", GetPostContentResponseDto.class);

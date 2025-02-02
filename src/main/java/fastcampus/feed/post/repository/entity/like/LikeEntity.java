@@ -6,6 +6,7 @@ import fastcampus.feed.post.domain.comment.Comment;
 import fastcampus.feed.user.domain.User;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Index;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +14,10 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 @Getter
-@Table(name = "likes")
+@Table(name = "likes",indexes = {
+        @Index(name = "idx_likes_target", columnList = "targetId, targetType"),
+        @Index(name = "idx_likes_user", columnList = "userId")
+})
 public class LikeEntity extends TimeBaseEntity {
 
     @EmbeddedId

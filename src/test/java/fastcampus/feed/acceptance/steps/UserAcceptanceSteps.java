@@ -12,22 +12,27 @@ public class UserAcceptanceSteps {
     public static ExtractableResponse<Response> createUser(CreateUserRequestDto dto) {
         return RestAssured
                 .given()
+                .log().all()
                 .body(dto)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .when()
                 .post("/user")
                 .then()
+                .log().all()
                 .extract();
     }
 
     public static ExtractableResponse<Response> followUser(FollowUserRequestDto dto) {
         return RestAssured
                 .given()
+                .log().all()
                 .body(dto)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .when()
                 .post("/follow")
                 .then()
+                .log().all()
+                .statusCode(200)
                 .extract();
     }
 }

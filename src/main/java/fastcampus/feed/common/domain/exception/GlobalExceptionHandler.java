@@ -1,7 +1,7 @@
-package fastcampus.feed.user.controller;
+package fastcampus.feed.common.domain.exception;
 
 import fastcampus.feed.common.controller.Response;
-import fastcampus.feed.common.domain.exception.ErrorCode;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -19,7 +19,13 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(IllegalStateException.class)
     public Response<Void> handleIllegalStateException(IllegalStateException e) {
         log.error(e.getMessage());
-        return Response.error(ErrorCode.INVALID_INPUT_VALUE);
+        return Response.error(ErrorCode.NOT_FOUND);
+    }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    public Response<Void> handleEntityNotFoundException(EntityNotFoundException e){
+        log.error(e.getMessage());
+        return Response.error(ErrorCode.ENTITY_NOT_FOUND);
     }
 
     @ExceptionHandler(Exception.class)

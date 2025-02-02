@@ -9,17 +9,17 @@ import org.junit.jupiter.params.provider.NullAndEmptySource;
 class UserInfoTest {
 
     @Test
-    void 생성자_정상(){
+    void 생성자_정상적으로_객체를_생성한다(){
         assertDoesNotThrow(() ->{
-            UserInfo userInfo = new UserInfo("test", "");
+            new UserInfo("test", "");
         });
     }
 
     @ParameterizedTest
     @NullAndEmptySource
-    void 생성자_이름_null(String name) {
-        assertThrows(IllegalStateException.class, () ->{
-            UserInfo userInfo = new UserInfo(name, "");
+    void 생성자_이름이_null이거나_빈_문자열이면_예외를_던진다(String name) {
+        assertThrows(IllegalArgumentException.class, () ->{
+            new UserInfo(name, "");
         });
     }
 

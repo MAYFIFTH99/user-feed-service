@@ -3,6 +3,7 @@ package fastcampus.feed.user.repository;
 import fastcampus.feed.user.domain.User;
 import fastcampus.feed.user.repository.entity.UserEntity;
 import fastcampus.feed.user.repository.jpa.JpaUserRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -22,6 +23,6 @@ public class UserRepositoryImpl implements UserRepository{
     @Override
     public User findById(Long userId) {
         return jpaUserRepository.findById(userId).map(UserEntity::toUser)
-                .orElseThrow(IllegalStateException::new);
+                .orElseThrow(() -> new EntityNotFoundException("사용자를 찾을 수 없습니다."));
     }
 }

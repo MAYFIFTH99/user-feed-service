@@ -37,6 +37,7 @@ public class FollowRepositoryImpl implements FollowRepository {
     }
 
     @Override
+    @Transactional
     public void delete(User user, User targetUser) {
         FollowIdEntity followIdEntity = new FollowIdEntity(user.getId(), targetUser.getId());
         jpaFollowRepository.deleteById(followIdEntity);
