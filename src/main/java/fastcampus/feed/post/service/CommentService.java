@@ -33,6 +33,7 @@ public class CommentService {
         return commentRepository.save(comment);
     }
 
+    @Transactional(readOnly = true)
     public Comment getComment(Long commentId) {
         return commentRepository.findById(commentId);
     }
