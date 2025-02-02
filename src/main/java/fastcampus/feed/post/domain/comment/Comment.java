@@ -34,12 +34,15 @@ public class Comment {
 
     public void like(User user) {
         if (this.author.equals(user)) {
-            throw new IllegalStateException();
+            throw new IllegalStateException("내 댓글에는 좋아요를 누를 수 없습니다.");
         }
         likeCount.increase();
     }
 
     public void unlike(User user) {
+        if (this.author.equals(user)) {
+            throw new IllegalStateException("내 댓글에는 좋아요를 취소할 수 없습니다.");
+        }
         likeCount.decrease();
     }
 
