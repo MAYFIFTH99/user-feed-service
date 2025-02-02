@@ -26,7 +26,6 @@ import org.hibernate.annotations.DynamicUpdate;
 @Table(name = "post")
 @Getter
 @NoArgsConstructor
-@DynamicUpdate
 public class PostEntity extends TimeBaseEntity {
 
     @Id
