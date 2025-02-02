@@ -45,7 +45,9 @@ class UserServiceTest {
         Long nonExistentUserId = 999L;
 
         // when & then
-        Assertions.assertThatThrownBy(() -> userService.getUser(nonExistentUserId));
+        Assertions.assertThatThrownBy(() -> userService.getUser(nonExistentUserId))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("User를 찾을 수 없습니다.");
     }
 
 }

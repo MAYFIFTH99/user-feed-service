@@ -98,6 +98,7 @@ class FollowServiceTest {
         FollowUserRequestDto dto = new FollowUserRequestDto(user1.getId(), 999L);
 
         // when & then
-        Assertions.assertThatThrownBy(() -> followService.follow(dto));
+        Assertions.assertThatThrownBy(() -> followService.follow(dto))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }
