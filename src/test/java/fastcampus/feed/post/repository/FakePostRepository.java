@@ -13,6 +13,7 @@ public class FakePostRepository implements PostRepository {
     public Post save(Post post) {
         if (post.getId() != null) {
             store.put(post.getId(), post);
+            return post;
         }
         Post newPost = new Post(sequence, post.getAuthor(), post.getPostContent(),
                 post.getPostPublishState());
