@@ -2,9 +2,11 @@ package fastcampus.feed.post.repository.post_queue;
 
 import fastcampus.feed.post.repository.entity.post.PostEntity;
 import java.util.List;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
 @Repository
+@Primary
 public class UserPostQueueRedisRepositoryImpl implements UserPostQueueRedisRepository{
 
     @Override
