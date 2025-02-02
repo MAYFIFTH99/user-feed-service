@@ -3,12 +3,13 @@ package fastcampus.feed.post.domain;
 import fastcampus.feed.common.domain.PositiveIntegerCount;
 import fastcampus.feed.post.domain.content.PostContent;
 import fastcampus.feed.user.domain.User;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
 @Getter
-@AllArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder
 public class Post {
 
@@ -29,7 +30,7 @@ public class Post {
         this.likeCount = new PositiveIntegerCount();
     }
 
-    public void like(User user){
+    public void like(User user) {
         if (user == null) {
             throw new IllegalStateException("좋아요를 누른 사용자를 찾을 수 없습니다.");
         }
@@ -38,10 +39,10 @@ public class Post {
             throw new IllegalStateException("자신의 게시글에는 좋아요를 누를 수 없습니다.");
         }
 
-       likeCount.increase();
+        likeCount.increase();
     }
 
-    public void unlike(User user){
+    public void unlike(User user) {
         if (user == null) {
             throw new IllegalStateException("좋아요를 취소한 사용자를 찾을 수 없습니다.");
         }
@@ -50,7 +51,7 @@ public class Post {
 
     public void updatePost(User user, String content, PostPublishState postPublishState) {
         validateNotNull(user, "사용자");
-        if(!author.equals(user)) {
+        if (!author.equals(user)) {
             throw new IllegalArgumentException();
         }
         this.postContent.updateContent(content);
@@ -62,5 +63,4 @@ public class Post {
             throw new IllegalArgumentException(String.format("%s를 찾을 수 없습니다.", fieldName));
         }
     }
-
 }

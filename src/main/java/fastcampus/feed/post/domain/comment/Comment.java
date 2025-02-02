@@ -4,12 +4,13 @@ import fastcampus.feed.common.domain.PositiveIntegerCount;
 import fastcampus.feed.post.domain.Post;
 import fastcampus.feed.post.domain.content.Content;
 import fastcampus.feed.user.domain.User;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
 @Getter
-@AllArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder
 public class Comment {
 
