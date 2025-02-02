@@ -11,8 +11,9 @@ public class FakeUserRepository implements UserRepository{
 
     @Override
     public User save(User user) {
-        User newUser = new User(sequence.get(), user.getUserInfo());
-        store.put(sequence.getAndIncrement(), newUser);
+        long id = sequence.getAndIncrement();
+        User newUser = new User(id, user.getUserInfo());
+        store.put(id, newUser);
         return newUser;
     }
 
