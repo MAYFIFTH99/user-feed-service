@@ -3,7 +3,6 @@ package fastcampus.feed.common.domain.exception;
 import fastcampus.feed.common.controller.Response;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -24,7 +23,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(EntityNotFoundException.class)
-    public Response<Void> handleNotFoundException(NotFoundException e){
+    public Response<Void> handleEntityNotFoundException(EntityNotFoundException e){
         log.error(e.getMessage());
         return Response.error(ErrorCode.ENTITY_NOT_FOUND);
     }
