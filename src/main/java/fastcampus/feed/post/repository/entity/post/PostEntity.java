@@ -15,12 +15,14 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.LockModeType;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Version;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
+import org.springframework.data.jpa.repository.Lock;
 
 @Entity
 @Table(name = "post")
@@ -67,6 +69,7 @@ public class PostEntity extends TimeBaseEntity {
                 .build();
     }
 
+    @Lock(LockModeType.OPTIMISTIC)
     public void increaseCommentCount(){
         this.commentCount++;
     }
