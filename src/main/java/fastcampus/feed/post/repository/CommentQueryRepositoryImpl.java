@@ -66,6 +66,6 @@ public class CommentQueryRepositoryImpl implements CommentQueryRepository {
                 .eq(likeEntity.likeIdEntity.targetId)
                 .and(likeEntity.likeIdEntity.userId.eq(userId))
                 .and(likeEntity.likeIdEntity.targetType.eq(
-                        LikeTarget.valueOf(LikeTarget.COMMENT.name())));
+                        LikeTarget.COMMENT));
     }
 }
