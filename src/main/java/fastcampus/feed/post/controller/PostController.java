@@ -6,6 +6,7 @@ import fastcampus.feed.post.service.dto.CreatePostRequestDto;
 import fastcampus.feed.post.service.dto.LikePostRequestDto;
 import fastcampus.feed.post.service.dto.UpdatePostRequestDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,7 +38,7 @@ public class PostController {
         return Response.ok(null);
     }
 
-    @PostMapping("/{postId}/unlike")
+    @DeleteMapping("/{postId}/like")
     public Response<Void> unlikePost(@PathVariable Long postId, @RequestBody LikePostRequestDto dto){
         postService.unlikePost(postId, dto);
         return Response.ok(null);
