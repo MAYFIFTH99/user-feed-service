@@ -65,11 +65,9 @@ public class PostService {
         Post post = getPost(postId);
 
         if (likeRepository.isAlreadyLiked(user, post)) {
+            post.unlike(user);
             likeRepository.delete(user, post);
         }
-
-        post.unlike(user);
-
     }
 
 
