@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Getter
 @Table(name = "likes",indexes = {
-        @Index(name = "idx_likes_target", columnList = "targetId, target"),
+        @Index(name = "idx_likes_target", columnList = "targetId, targetType"),
         @Index(name = "idx_likes_user", columnList = "userId")
 })
 public class LikeEntity extends TimeBaseEntity {
