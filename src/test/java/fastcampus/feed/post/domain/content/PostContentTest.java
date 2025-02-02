@@ -1,9 +1,8 @@
 package fastcampus.feed.post.domain.content;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
@@ -22,7 +21,7 @@ class PostContentTest {
     @ParameterizedTest
     @NullAndEmptySource
     void postContentException(String ex) throws Exception {
-        assertThrows(IllegalStateException.class, () -> new PostContent(ex));
+        assertThrows(IllegalArgumentException.class, () -> new PostContent(ex));
     }
 
     @ParameterizedTest
@@ -30,7 +29,7 @@ class PostContentTest {
     void 글자_500이상_오류(String ex) throws Exception {
         String content = ex.repeat(501);
         //given
-        assertThrows(IllegalStateException.class, () -> new PostContent(content));
+        assertThrows(IllegalArgumentException.class, () -> new PostContent(content));
 
         //when
 

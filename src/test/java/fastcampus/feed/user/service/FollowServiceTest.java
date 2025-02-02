@@ -10,6 +10,7 @@ import fastcampus.feed.user.repository.FollowRepository;
 import fastcampus.feed.user.repository.UserRepository;
 import fastcampus.feed.user.service.dto.CreateUserRequestDto;
 import fastcampus.feed.user.service.dto.FollowUserRequestDto;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -61,7 +62,7 @@ class FollowServiceTest {
         FollowUserRequestDto dto = new FollowUserRequestDto(user1.getId(),
                 user1.getId());
         //when & then
-        assertThrows(IllegalStateException.class, () -> followService.follow(dto));
+        assertThrows(IllegalArgumentException.class, () -> followService.follow(dto));
     }
 
     @Test
@@ -89,5 +90,14 @@ class FollowServiceTest {
 
         //when & then
         assertThrows(IllegalStateException.class, () -> followService.unfollow(dto));
+    }
+
+    @Test
+    void follow_존재하지_않는_사용자() {
+        // given
+        FollowUserRequestDto dto = new FollowUserRequestDto(user1.getId(), 999L);
+
+        // when & then
+        Assertions.assertThatThrownBy(() -> followService.follow(dto));
     }
 }

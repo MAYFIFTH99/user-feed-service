@@ -18,7 +18,7 @@ class UserInfoTest {
     @ParameterizedTest
     @NullAndEmptySource
     void 생성자_이름이_null이거나_빈_문자열이면_예외를_던진다(String name) {
-        assertThrows(IllegalStateException.class, () ->{
+        assertThrows(IllegalArgumentException.class, () ->{
             new UserInfo(name, "");
         });
     }

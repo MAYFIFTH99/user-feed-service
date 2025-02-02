@@ -1,9 +1,6 @@
 package fastcampus.feed.user.service;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import fastcampus.feed.user.domain.User;
-import fastcampus.feed.user.domain.UserInfo;
 import fastcampus.feed.user.repository.FakeUserRepository;
 import fastcampus.feed.user.repository.UserRepository;
 import fastcampus.feed.user.service.dto.CreateUserRequestDto;
@@ -44,11 +41,11 @@ class UserServiceTest {
 
     @Test
     void getUser_예외() throws Exception {
-        //given
+        // given
+        Long nonExistentUserId = 999L;
 
-        //when
-
-        //then
+        // when & then
+        Assertions.assertThatThrownBy(() -> userService.getUser(nonExistentUserId));
     }
 
 }
